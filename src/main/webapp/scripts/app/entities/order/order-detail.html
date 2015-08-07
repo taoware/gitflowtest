@@ -1,0 +1,103 @@
+
+<div>
+    <h2><span translate="sandboxApp.order.detail.title">Order</span> {{order.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myString">MyString</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myString}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myInteger">MyInteger</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myInteger}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myLong">MyLong</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myLong}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myFloat">MyFloat</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myFloat}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myDouble">MyDouble</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myDouble}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myDecimal">MyDecimal</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myDecimal}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myDate">MyDate</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myDate}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myDateTime">MyDateTime</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myDateTime}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myBoolean">MyBoolean</span>
+                </td>
+                <td>
+                    <input type="text" class="input-sm form-control" value="{{order.myBoolean}}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="sandboxApp.order.myEnumeration">MyEnumeration</span>
+                </td>
+                <td>
+                    <span class="input-sm form-control readonly" translate="sandboxApp.DataType.SELECT"
+                          translate-interpolation="messageformat" translate-values="{ VALUE: order.myEnumeration }"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="order"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
