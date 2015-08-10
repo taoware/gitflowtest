@@ -28,4 +28,9 @@ angular.module('sandboxApp')
                 }
             }
         });
+    })
+    .factory('Orders', function ($resource, DateUtils) {
+        return $resource('api/orders/page', {}, {
+            'query': { method: 'GET'}
+        });
     });

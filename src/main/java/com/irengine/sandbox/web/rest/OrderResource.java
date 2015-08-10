@@ -84,6 +84,19 @@ public class OrderResource {
     }
 
     /**
+     * GET  /orders -> get all the orders.
+     */
+    @RequestMapping(value = "/orders/page",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> getAllByPage(@RequestParam(value = "page" , required = false) Integer offset,
+                                              @RequestParam(value = "per_page", required = false) Integer limit) {
+        Page<Order> page = orderRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
+    /**
      * GET  /orders/:id -> get the "id" order.
      */
     @RequestMapping(value = "/orders/{id}",
