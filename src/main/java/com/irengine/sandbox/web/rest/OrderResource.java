@@ -1,6 +1,8 @@
 package com.irengine.sandbox.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.irengine.sandbox.domain.Order;
 import com.irengine.sandbox.repository.OrderRepository;
 import com.irengine.sandbox.web.rest.util.HeaderUtil;
@@ -8,6 +10,7 @@ import com.irengine.sandbox.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -83,16 +88,61 @@ public class OrderResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    private static final String Limit = "per_page";
+    private static final String Offset = "page";
+    private static final String Sorting = "sort";
+    private static final String Filtering = "filter";
+
     /**
-     * GET  /orders -> get all the orders.
+     * GET  /orders/q -> query orders.
      */
-    @RequestMapping(value = "/orders/page",
+    @RequestMapping(value = "/orders/q",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<?> getAllByPage(@RequestParam(value = "page" , required = false) Integer offset,
-                                              @RequestParam(value = "per_page", required = false) Integer limit) {
-        Page<Order> page = orderRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+    public ResponseEntity<?> query(@RequestParam Map<String, Object> params) {
+
+        // pagination
+        Pageable pageable;
+        Integer offset = Integer.parseInt(params.get(Offset).toString());
+        Integer limit = Integer.parseInt(params.get(Limit).toString());
+
+        // sorting
+        if (params.containsKey(Sorting) && !params.get(Sorting).toString().isEmpty()) {
+
+            Map<String, String> sort = new HashMap<>();
+            ObjectMapper mapper = new ObjectMapper();
+
+            try {
+                sort = mapper.readValue(params.get(Sorting).toString(), new TypeReference<Map<String, String>>(){});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            log.debug("request with pagination and sorting");
+            pageable = PaginationUtil.generatePageRequest(offset, limit, sort.get("field"), sort.get("sort"));
+        }
+        else {
+            log.debug("request with pagination");
+            pageable = PaginationUtil.generatePageRequest(offset, limit);
+        }
+
+        // filtering support angular grid filtering number and text
+        if (params.containsKey(Filtering) && !params.get(Filtering).toString().isEmpty()) {
+
+            Map<String, Map<String, String>> filter = new HashMap<>();
+            ObjectMapper mapper = new ObjectMapper();
+
+            try {
+                filter = mapper.readValue(params.get(Filtering).toString(), new TypeReference<Map<String, Map<String, String>>>(){});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            log.debug("request with filtering");
+        }
+
+        Page<Order> page = orderRepository.findAll(pageable);
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
