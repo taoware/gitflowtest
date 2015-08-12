@@ -117,8 +117,8 @@ angular.module('sandboxApp')
                     var data = [];
                     var total = 0;
                     var page = Math.floor(params.startRow / $scope.pageSize) + 1;
-                    console.log(params);
 
+                    console.log(params);
                     console.log('asking for ' + params.startRow + ' to ' + params.endRow);
 
                     Orders.query({page: page, per_page: $scope.pageSize, sort: params.sortModel, filter: params.filterModel}, function(result) {

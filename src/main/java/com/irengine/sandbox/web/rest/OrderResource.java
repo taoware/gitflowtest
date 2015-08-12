@@ -5,12 +5,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.irengine.sandbox.domain.Order;
 import com.irengine.sandbox.repository.OrderRepository;
+import com.irengine.sandbox.web.rest.util.Filter;
+import com.irengine.sandbox.web.rest.util.FilterUtil;
 import com.irengine.sandbox.web.rest.util.HeaderUtil;
 import com.irengine.sandbox.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,10 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing Order.
@@ -88,10 +88,10 @@ public class OrderResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    private static final String Limit = "per_page";
-    private static final String Offset = "page";
-    private static final String Sorting = "sort";
-    private static final String Filtering = "filter";
+    private static final String LIMIT = "per_page";
+    private static final String OFFSET = "page";
+    private static final String SORTING = "sort";
+    private static final String FILTERING = "filter";
 
     /**
      * GET  /orders/q -> query orders.
@@ -104,17 +104,17 @@ public class OrderResource {
 
         // pagination
         Pageable pageable;
-        Integer offset = Integer.parseInt(params.get(Offset).toString());
-        Integer limit = Integer.parseInt(params.get(Limit).toString());
+        Integer offset = Integer.parseInt(params.get(OFFSET).toString());
+        Integer limit = Integer.parseInt(params.get(LIMIT).toString());
 
         // sorting
-        if (params.containsKey(Sorting) && !params.get(Sorting).toString().isEmpty()) {
+        if (params.containsKey(SORTING) && !params.get(SORTING).toString().isEmpty()) {
 
             Map<String, String> sort = new HashMap<>();
             ObjectMapper mapper = new ObjectMapper();
 
             try {
-                sort = mapper.readValue(params.get(Sorting).toString(), new TypeReference<Map<String, String>>(){});
+                sort = mapper.readValue(params.get(SORTING).toString(), new TypeReference<Map<String, String>>(){});
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -128,18 +128,27 @@ public class OrderResource {
         }
 
         // filtering support angular grid filtering number and text
-        if (params.containsKey(Filtering) && !params.get(Filtering).toString().isEmpty()) {
+        if (params.containsKey(FILTERING) && !params.get(FILTERING).toString().isEmpty()) {
 
             Map<String, Map<String, String>> filter = new HashMap<>();
             ObjectMapper mapper = new ObjectMapper();
 
             try {
-                filter = mapper.readValue(params.get(Filtering).toString(), new TypeReference<Map<String, Map<String, String>>>(){});
+                filter = mapper.readValue(params.get(FILTERING).toString(), new TypeReference<Map<String, Map<String, String>>>(){});
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            // sample filtering field,operator,value
             log.debug("request with filtering");
+
+            List<Filter> filters = new ArrayList<>();
+            filters.add(new Filter("id", Filter.Operator.EQ, "1"));
+
+            Specification<Order> specification = FilterUtil.generateSpecifications(filters, Order.class);
+
+            Page<Order> page = orderRepository.findAll(specification, pageable);
+            return new ResponseEntity<>(page, HttpStatus.OK);
         }
 
         Page<Order> page = orderRepository.findAll(pageable);
