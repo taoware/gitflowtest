@@ -70,7 +70,11 @@ class ActivityGatlingTest extends Simulation {
             .exec(http("Create new activity")
             .put("/api/activitys")
             .headers(headers_http_authenticated)
+<<<<<<< HEAD
             .body(StringBody("""{"id":null, "title":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "start":"2020-01-01T00:00:00.000Z", "end":"2020-01-01T00:00:00.000Z", "file":"SAMPLE_TEXT"}""")).asJSON
+=======
+            .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT"}""")).asJSON
+>>>>>>> add activity entity
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_activity_url")))
             .pause(10)

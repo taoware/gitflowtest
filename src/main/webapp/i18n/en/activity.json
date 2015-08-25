@@ -12,11 +12,15 @@
             "detail": {
                 "title": "Activity"
             },
+<<<<<<< HEAD
             "title": "Title",
             "description": "Description",
             "start": "Start",
             "end": "End",
             "file": "Input"
+=======
+            "code": "Code"
+>>>>>>> add activity entity
         }
     }
 }

@@ -13,10 +13,14 @@
 =======
 
                 "dummy": "Dummy",
+<<<<<<< HEAD
 
                 "test11": "Test11",
 
 >>>>>>> ed8a6346258e2b6bb6b628bef867c9304dcf1f95
+=======
+                "activity": "Activity",
+>>>>>>> add activity entity
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

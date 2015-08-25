@@ -11,7 +11,11 @@
     <include file="classpath:config/liquibase/changelog/20150807024736_added_entity_Order.xml" relativeToChangelogFile="false"/>
 =======
     <include file="classpath:config/liquibase/changelog/20150825025955_added_entity_Dummy.xml" relativeToChangelogFile="false"/>
+<<<<<<< HEAD
     <include file="classpath:config/liquibase/changelog/20150825030301_added_entity_Test11.xml" relativeToChangelogFile="false"/>
 >>>>>>> ed8a6346258e2b6bb6b628bef867c9304dcf1f95
+=======
+    <include file="classpath:config/liquibase/changelog/20150825034436_added_entity_Activity.xml" relativeToChangelogFile="false"/>
+>>>>>>> add activity entity
     <!-- JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

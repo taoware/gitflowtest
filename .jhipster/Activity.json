@@ -3,6 +3,7 @@
     "fields": [
         {
             "fieldId": 1,
+<<<<<<< HEAD
             "fieldName": "title",
             "fieldType": "String",
             "fieldIsEnum": false,
@@ -65,11 +66,20 @@
             "fieldValidateRules": [
                 "required"
             ]
+=======
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Code",
+            "fieldNameUnderscored": "code",
+            "fieldInJavaBeanMethod": "Code",
+            "fieldValidate": false
+>>>>>>> add activity entity
         }
     ],
     "fieldsContainOwnerManyToMany": false,
     "fieldsContainOwnerOneToOne": false,
     "fieldsContainOneToMany": false,
+<<<<<<< HEAD
     "fieldsContainLocalDate": true,
     "fieldsContainCustomTime": true,
     "fieldsContainBigDecimal": false,
@@ -79,4 +89,15 @@
     "dto": "no",
     "pagination": "no",
     "validation": true
+=======
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150825034436",
+    "dto": "no",
+    "pagination": "pager",
+    "validation": false
+>>>>>>> add activity entity
 }
