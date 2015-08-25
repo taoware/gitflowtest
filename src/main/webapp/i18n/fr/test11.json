@@ -1,0 +1,18 @@
+{
+    "sandboxApp": {
+        "test11" : {
+            "home": {
+                "title": "Test11s",
+                "createLabel": "Créer un nouveau Test11",
+                "createOrEditLabel": "Créer ou éditer un Test11"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Test11 {{ id }} ?"
+            },
+            "detail": {
+                "title": "Test11"
+            }
+        }
+    }
+}
+
