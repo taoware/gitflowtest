@@ -1,0 +1,23 @@
+{
+    "sandboxApp": {
+        "activity" : {
+            "home": {
+                "title": "Activitys",
+                "createLabel": "Créer un nouveau Activity",
+                "createOrEditLabel": "Créer ou éditer un Activity"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Activity {{ id }} ?"
+            },
+            "detail": {
+                "title": "Activity"
+            },
+            "title": "Title",
+            "description": "Description",
+            "start": "Start",
+            "end": "End",
+            "file": "Input"
+        }
+    }
+}
+
