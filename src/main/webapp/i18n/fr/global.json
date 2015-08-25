@@ -6,9 +6,17 @@
             "home": "Accueil",
             "entities": {
                 "main": "Entités",
+<<<<<<< HEAD
                 "author": "Author",
                 "book": "Book",
                 "order": "Order",
+=======
+
+                "dummy": "Dummy",
+
+                "test11": "Test11",
+
+>>>>>>> ed8a6346258e2b6bb6b628bef867c9304dcf1f95
                 "additionalEntity": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
