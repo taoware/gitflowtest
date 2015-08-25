@@ -1,0 +1,20 @@
+{
+    "sandboxApp": {
+        "dummy" : {
+            "home": {
+                "title": "Dummys",
+                "createLabel": "Créer un nouveau Dummy",
+                "createOrEditLabel": "Créer ou éditer un Dummy"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Dummy {{ id }} ?"
+            },
+            "detail": {
+                "title": "Dummy"
+            },
+            "code": "Code",
+            "name": "Name"
+        }
+    }
+}
+
